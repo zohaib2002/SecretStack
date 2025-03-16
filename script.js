@@ -22,7 +22,7 @@ function loadHome() {
     const content = document.getElementById("content");
     content.innerHTML = "<p>Loading posts...</p>";
 
-    fetch("posts.json")
+    fetch("./posts.json")
         .then(response => response.json())
         .then(posts => {
             content.innerHTML = "";
