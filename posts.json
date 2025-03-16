@@ -1,0 +1,25 @@
+[
+    {
+        "id": "post1",
+        "title": "Hiding Data in Pixels: Image Steganography",
+        "author": "John Doe",
+        "date": "2025-03-07",
+        "tags": ["blogging", "web development"]
+      },
+    {
+      "id": "post2",
+      "title": "What happens when you start your computer? Bootstrapping in Detail",
+      "author": "Jane Smith",
+      "date": "2025-03-08",
+      "tags": ["JavaScript", "programming", "tutorial"]
+    },
+    {
+        "id": "post3",
+        "title": "Virtual Memory, Paging, Cache, and other memory management terms simplified",
+        "author": "Jane Smith",
+        "date": "2025-03-08",
+        "tags": ["JavaScript", "programming", "tutorial"]
+    }
+
+  ]
+  

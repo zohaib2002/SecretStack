@@ -1,0 +1,268 @@
+/* Import Professional Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Merriweather:wght@300;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Latin+Modern+Roman:wght@400;700&display=swap');
+
+/* Default Light Mode */
+body {
+    font-family: 'Inter';
+    background-color: #f5f5f5; /* Light grey */
+    color: #222; /* Dark text */
+    font-size: 18px;
+    margin: 0 auto;
+    padding: 20px;
+    max-width: 1000px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo {
+    height: 120px; /* Adjust the size as needed */
+    width: 120px;
+    vertical-align: middle;
+    margin-right: 20px;
+    margin-left: 20px;
+    margin-bottom: 8px;
+}
+
+#content {
+    max-width: 900px;
+}
+
+/* Headings & Links */
+h2, h3 {
+    font-family: 'Merriweather', serif;
+    font-weight: 700;
+}
+
+
+h1 {
+    font-family: 'Consolas', monospace;
+    font-size: 48px;
+    -webkit-text-stroke: 0.5px black; /* Chrome/Safari */
+    text-shadow: 0 0 1px black;       /* Backup for other browsers */
+
+}
+
+/* Ensures the container behaves as a flexbox */
+.logo-container {
+    display: flex;
+    align-items: center; /* Default: Logo beside text */
+    text-decoration: none;
+    color: inherit;
+}
+
+@media (max-width: 600px) {
+    .logo-container {
+        flex-direction: column; /* Stack logo on top */
+        align-items: center; /* Center logo and text */
+    }
+
+    .logo {
+        margin-right: 0; /* Remove side margin */
+        margin-left: 0;
+        margin-bottom: 5px; /* Add spacing between logo and text */
+    }
+}
+
+
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Header */
+header {
+    background: #ddd;
+    color: #222;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    align-items: center;
+    border-radius: 8px;
+    max-width: 1000px;
+    width: 100%;
+}
+
+/* Footer */
+footer {
+    background: #ddd;
+    color: #222;
+    text-align: center;
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 8px;
+    max-width: 1000px;
+    width: 100%;
+}
+
+/* Header Controls (Search + Dark Mode Toggle) */
+.header-controls {
+    display: flex;
+    gap: 10px;
+}
+
+#search {
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+    background: #fff;
+    color: #222;
+    font-weight: bold;
+}
+
+#theme-toggle {
+    background: #bbb;
+    color: #222;
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+/* Post Preview */
+.post-preview {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+.summary {
+    font-family: 'Latin Modern Roman', serif;
+    line-height: 1.6;
+    text-align: justify;
+    line-height: 1.6; /* Improves spacing */
+    word-spacing: 0.1em; /* Reduces excessive gaps */
+}
+
+.post-preview h2 {
+    font-size: 22px;
+    line-height: 1.6;
+}
+
+.post-preview p.meta {
+    font-size: 14px;
+    color: #666;
+}
+
+/* Cover Image */
+.cover-img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+}
+
+/* Tags */
+.tags {
+    margin-top: 10px;
+}
+
+.tag {
+    background: #ddd;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    margin-right: 5px;
+    display: inline-block;
+}
+
+/* Read More Button */
+.read-more {
+    display: inline-block;
+    margin-top: 10px;
+    color: #222;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background: #ccc;
+    align-self: flex-end; /* Moves it to the right */
+}
+
+.read-more:hover {
+    background: #bbb;
+}
+
+
+/* Dark Mode */
+.dark-mode {
+    background-color: #222; /* Dark grey */
+    color: #ddd;
+}
+
+.dark-mode header {
+    background: #333;
+    color: white;
+}
+
+
+.dark-mode footer {
+    background: #333;
+    color: white;
+}
+
+.dark-mode .post-preview {
+    background: #333;
+    box-shadow: none;
+}
+
+.dark-mode #theme-toggle {
+    background: #666;
+    color: white;
+}
+
+.dark-mode #search {
+    background: #444;
+    color: white;
+}
+
+.dark-mode .tag {
+    background: #555;
+}
+
+.dark-mode .read-more {
+    background: #444;
+    color: white;
+}
+
+.dark-mode .read-more:hover {
+    background: #666;
+}
+
+/* Responsive Layout */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .header-controls {
+        margin-top: 10px;
+    }
+
+    #search {
+        width: 100%;
+        text-align: center;
+    }
+
+    .post-preview {
+        padding: 15px;
+    }
+
+    img {
+        width: 100%;
+        height: auto;
+    }
+}
