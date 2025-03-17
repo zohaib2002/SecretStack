@@ -30,3 +30,7 @@ article .tags {
     height: auto;
     display: block;
 }
+
+#disqus_thread {
+    margin-top: 20px; /* Adjust spacing as needed */
+}

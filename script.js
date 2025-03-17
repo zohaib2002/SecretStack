@@ -79,28 +79,32 @@ function loadPost(postId) {
                         </article>
                         <br>
                         <a href="/" onclick="event.preventDefault(); loadHome();">Back to Home</a>
-                        
-
                         <div id="disqus_thread"></div>
-                        <script>
-                            var disqus_config = function () {
-                            this.page.url = window.location.href;
-                            this.page.identifier = ${postId}; 
-                            };
-                            (function() { // DON'T EDIT BELOW THIS LINE
-                            var d = document, s = d.createElement('script');
-                            s.src = 'https://longlongdouble.disqus.com/embed.js';
-                            s.setAttribute('data-timestamp', +new Date());
-                            (d.head || d.body).appendChild(s);
-                            })();
-                        </script>
-                        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
                     `;
+
+                    // If Disqus is already loaded, reset it for the new post
+                    if (window.DISQUS) {
+                        window.DISQUS.reset({
+                            reload: true,
+                            config: function () {
+                                this.page.url = window.location.href;
+                                this.page.identifier = postId;
+                            }
+                        });
+                    } else {
+                        // Load Disqus for the first time
+                        var d = document, s = d.createElement('script');
+                        s.src = 'https://longlongdouble.disqus.com/embed.js';
+                        s.setAttribute('data-timestamp', +new Date());
+                        (d.head || d.body).appendChild(s);
+                    }
+
                     hideSearchBar();
                 });
         })
         .catch(error => console.error("Error loading post:", error));
 }
+
 
 function extractSummary(html) {
     const doc = new DOMParser().parseFromString(html, "text/html");
