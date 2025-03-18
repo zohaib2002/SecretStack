@@ -440,3 +440,75 @@ article .tags {
     display: block;
     opacity: 1;
 }
+
+
+/************************************************/
+
+
+.share-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: grey;
+    font-size: 20px;
+    transition: color 0.2s ease-in-out;
+}
+
+.share-button:hover {
+    color: black;
+}
+
+/* Share Popup Styles */
+.share-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 15px;
+    height: 45%;
+    width: 50%;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    text-align: center;
+}
+
+.dark-mode .share-popup {
+    background: #222;
+}
+
+.share-popup .share-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+.share-popup a {
+    padding: 8px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+    width: 80%;
+    background: #f3f3f3;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.dark-mode .share-popup a {
+    background: #333
+}
+
+.share-popup a:hover {
+    background: #ddd;
+}
+
+.dark-mode .share-popup a:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+
+/************************************************/

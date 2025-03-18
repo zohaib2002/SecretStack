@@ -105,6 +105,7 @@ window.addEventListener("scroll", () => {
     }
 });
 
+
 function loadPost(postId) {
     onHome = false;
     history.pushState(null, "", `?post=${postId}`);
@@ -120,10 +121,15 @@ function loadPost(postId) {
             fetch(`posts/${postId}/post.html`)
                 .then(response => response.text())
                 .then(html => {
-                   // document.head.innerHTML += '<link rel="stylesheet" href="post.css">';
                     content.innerHTML = `
                         <article>
-                            <h2>${post.title}</h2>
+                            <div class="post-header">
+                                <h2>${post.title}
+                                <button class="share-button" onclick="openSharePopup()">
+                                    <span>➥</span>
+                                </button>
+                                </h2>
+                            </div>
                             <p class="meta">By ${post.author} | ${post.date}</p>
                             <div class="tags">${post.tags.map(tag => `<span class="tag">${tag}</span>`).join(" ")}</div>
                             <hr>
@@ -133,9 +139,20 @@ function loadPost(postId) {
                         <a href="/">Back to Home</a>
                         <button id="scroll-to-top" onclick="scrollToTop()">🡅</button>
                         <div id="disqus_thread"></div>
+
+                        <!-- Share Popup -->
+                        <div id="share-popup" class="share-popup">
+                            <div class="share-content">
+                                <p>Share this post</p>
+                                <a onclick="copyLink('${window.location.href}')">📋 Copy Link</a>
+                                <a href="https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(window.location.href)}" target="_blank">Twitter</a>
+                                <a href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}" target="_blank">Facebook</a>
+                                <a href="mailto:?subject=${encodeURIComponent(post.title)}&body=${encodeURIComponent(window.location.href)}">Email</a>
+                                <a onclick="closeSharePopup()">✖ Close</a>
+                            </div>
+                        </div>
                     `;
 
-                    // If Disqus is already loaded, reset it for the new post
                     if (window.DISQUS) {
                         window.DISQUS.reset({
                             reload: true,
@@ -145,7 +162,6 @@ function loadPost(postId) {
                             }
                         });
                     } else {
-                        // Load Disqus for the first time
                         var d = document, s = d.createElement('script');
                         s.src = 'https://longlongdouble.disqus.com/embed.js';
                         s.setAttribute('data-timestamp', +new Date());
@@ -158,6 +174,26 @@ function loadPost(postId) {
         .catch(error => console.error("Error loading post:", error));
 }
 
+/*********************** */
+function openSharePopup() {
+    const popup = document.getElementById("share-popup");
+    popup.style.display = "block";
+}
+
+function closeSharePopup() {
+    document.getElementById("share-popup").style.display = "none";
+}
+
+function copyLink(url) {
+    navigator.clipboard.writeText(url).then(() => {
+        alert("Link copied to clipboard!");
+    }).catch(err => {
+        console.error("Error copying link: ", err);
+    });
+}
+
+
+/******************************** */
 
 function extractSummary(html) {
     const doc = new DOMParser().parseFromString(html, "text/html");
