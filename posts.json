@@ -19,6 +19,34 @@
         "author": "Jane Smith",
         "date": "2025-03-08",
         "tags": ["JavaScript", "programming", "tutorial"]
+    },
+    {
+        "id": "post4",
+        "title": "Title4",
+        "author": "Jane Smith",
+        "date": "2025-03-08",
+        "tags": ["JavaScript", "programming", "tutorial"]
+    },
+    {
+        "id": "post5",
+        "title": "Title5",
+        "author": "Jane Smith",
+        "date": "2025-03-08",
+        "tags": ["JavaScript", "programming", "tutorial"]
+    },
+    {
+        "id": "post6",
+        "title": "Title6",
+        "author": "Jane Smith",
+        "date": "2025-03-08",
+        "tags": ["JavaScript", "programming", "tutorial"]
+    },
+    {
+        "id": "post7",
+        "title": "Title7",
+        "author": "Jane Smith",
+        "date": "2025-03-08",
+        "tags": ["JavaScript", "programming", "tutorial"]
     }
 
   ]

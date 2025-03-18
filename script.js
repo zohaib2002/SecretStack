@@ -16,43 +16,81 @@ document.addEventListener("DOMContentLoaded", () => {
     postId ? loadPost(postId) : loadHome();
 });
 
+let postsData = [];  // Stores all posts from posts.json
+let currentIndex = 0;  // Tracks how many posts have been loaded
+const postsPerPage = 5;  // Number of posts to load at a time
+let isLoading = false;  // Prevents multiple simultaneous loads
+
 function loadHome() {
     showSearchBar();
     history.pushState(null, "", "/");
     const content = document.getElementById("content");
-    content.innerHTML = "<p>Loading posts...</p>";
+    content.innerHTML = '<div class="loader"></div>';
 
     fetch("./posts.json")
         .then(response => response.json())
         .then(posts => {
-            content.innerHTML = "";
-            posts.forEach(post => {
-                fetch(`posts/${post.id}/post.html`)
-                    .then(response => response.text())
-                    .then(html => {
-                        const cover = extractCover(html);
-                        const summary = extractSummary(html);
-                        const tags = post.tags.map(tag => `<span class="tag">${tag}</span>`).join(" ");
-                        
-                        const postDiv = document.createElement("div");
-                        postDiv.className = "post-preview";
-                        postDiv.setAttribute("data-title", post.title.toLowerCase());
-
-                        postDiv.innerHTML = `
-                            ${cover ? `<img class="cover-img" src="${cover}" alt="Cover Image">` : ""}
-                            <h2><a href="?post=${post.id}" onclick="event.preventDefault(); loadPost('${post.id}');">${post.title}</a></h2>
-                            <p class="meta">By ${post.author} | ${post.date}</p>
-                            <p class="summary">${summary}</p>
-                            <div class="tags">${tags}</div>
-                            <a href="?post=${post.id}" class="read-more" onclick="event.preventDefault(); loadPost('${post.id}');">Read More</a>
-                        `;
-
-                        content.appendChild(postDiv);
-                    });
-            });
+            postsData = posts;  // Store posts for pagination
+            currentIndex = 0;  // Reset index
+            content.innerHTML = "";  // Clear content
+            loadNextPosts();  // Load the first batch
         })
         .catch(error => console.error("Error loading posts:", error));
 }
+
+function loadNextPosts() {
+    if (isLoading || currentIndex >= postsData.length) return;
+    isLoading = true;
+
+    const content = document.getElementById("content");
+
+    // Show a small circular loader
+    const loader = document.createElement("div");
+    loader.id = "post-loader";
+    loader.innerHTML = `<div class="loader"></div>`;
+    content.appendChild(loader);
+
+    // Load the next batch of posts
+    const postsToLoad = postsData.slice(currentIndex, currentIndex + postsPerPage);
+    const postPromises = postsToLoad.map(post =>
+        fetch(`posts/${post.id}/post.html`)
+            .then(response => response.text())
+            .then(html => {
+                const cover = extractCover(html);
+                const summary = extractSummary(html);
+                const tags = post.tags.map(tag => `<span class="tag">${tag}</span>`).join(" ");
+
+                const postDiv = document.createElement("div");
+                postDiv.className = "post-preview";
+                postDiv.setAttribute("data-title", post.title.toLowerCase());
+
+                postDiv.innerHTML = `
+                    ${cover ? `<img class="cover-img" src="${cover}" alt="Cover Image">` : ""}
+                    <h2><a href="?post=${post.id}" onclick="event.preventDefault(); loadPost('${post.id}');">${post.title}</a></h2>
+                    <p class="meta">By ${post.author} | ${post.date}</p>
+                    <p class="summary">${summary}</p>
+                    <div class="tags">${tags}</div>
+                    <a href="?post=${post.id}" class="read-more" onclick="event.preventDefault(); loadPost('${post.id}');">Read More</a>
+                `;
+
+                return postDiv;
+            })
+    );
+
+    Promise.all(postPromises).then(postElements => {
+        postElements.forEach(post => content.appendChild(post));
+        currentIndex += postsPerPage;  // Update index
+        loader.remove();  // Remove loader
+        isLoading = false;
+    });
+}
+
+// Detect when user reaches the bottom and load more posts
+window.addEventListener("scroll", () => {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 50) {
+        loadNextPosts();
+    }
+});
 
 function loadPost(postId) {
     history.pushState(null, "", `?post=${postId}`);
@@ -68,7 +106,7 @@ function loadPost(postId) {
             fetch(`posts/${postId}/post.html`)
                 .then(response => response.text())
                 .then(html => {
-                    document.head.innerHTML += '<link rel="stylesheet" href="post.css">';
+                   // document.head.innerHTML += '<link rel="stylesheet" href="post.css">';
                     content.innerHTML = `
                         <article>
                             <h2>${post.title}</h2>

@@ -36,12 +36,19 @@ h2, h3 {
 }
 
 
-h1 {
+.site-name {
     font-family: 'Consolas', monospace;
     font-size: 48px;
+    font-weight: bolder;
     -webkit-text-stroke: 0.5px black; /* Chrome/Safari */
     text-shadow: 0 0 1px black;       /* Backup for other browsers */
+}
 
+.sub-heading {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: 100;
 }
 
 /* Ensures the container behaves as a flexbox */
@@ -65,7 +72,19 @@ h1 {
     }
 }
 
-
+.loader {
+    width: 24px;
+    height: 24px;
+    border: 3px solid #ccc;
+    border-top: 3px solid #333;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
 
 a {
     text-decoration: none;
@@ -265,4 +284,42 @@ footer {
         width: 100%;
         height: auto;
     }
+}
+
+
+article {
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+article h2 {
+    font-size: 24px;
+}
+
+article p, article summary, article ul, article ol {
+    font-family: 'Latin Modern Roman', serif;
+    margin-bottom: 10px;
+    text-align: justify;
+    line-height: 1.6; /* Improves spacing */
+    word-spacing: 0.1em; /* Reduces excessive gaps */
+}
+
+
+
+article .meta {
+    font-family: 'Inter';
+}
+
+article .tags {
+    margin-top: 10px;
+}
+
+.cover-img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+#disqus_thread {
+    margin-top: 20px; /* Adjust spacing as needed */
 }

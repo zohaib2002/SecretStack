@@ -9,12 +9,15 @@
 </head>
 <body>
     <header>
-        <h1>
+        <div>
             <a href="/" onclick="event.preventDefault(); loadHome();" class="logo-container">
                 <img src="logo/light.png" alt="Secret Stack Logo" class="logo">
-                <span class="site-name">Secret Stack</span>
+                <div>
+                    <span class="site-name">Secret Stack</span>
+                    <div class="sub-heading">A secret stash of Computer Science content</div>
+                </div>
             </a>
-        </h1>
+        </div>
         <div class="header-controls">
             <input type="text" id="search" placeholder="Search posts..." oninput="filterPosts()">
             <button id="theme-toggle" onclick="toggleDarkMode()">🌙</button>
@@ -24,7 +27,7 @@
     <br>
 
     <main id="content">
-        <p>Loading posts...</p>
+        <div class="loader"></div>
     </main>
 
     <footer>
