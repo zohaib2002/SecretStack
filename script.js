@@ -1,3 +1,5 @@
+let onHome = true;
+
 document.addEventListener("DOMContentLoaded", () => {
     const isDarkMode = localStorage.getItem("darkMode") === "enabled";
 
@@ -22,6 +24,7 @@ const postsPerPage = 5;  // Number of posts to load at a time
 let isLoading = false;  // Prevents multiple simultaneous loads
 
 function loadHome() {
+    onHome = true;
     showSearchBar();
     history.pushState(null, "", "/");
     const content = document.getElementById("content");
@@ -87,12 +90,23 @@ function loadNextPosts() {
 
 // Detect when user reaches the bottom and load more posts
 window.addEventListener("scroll", () => {
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 50) {
-        loadNextPosts();
+   if (!onHome) {
+        const button = document.getElementById("scroll-to-top");
+        if (window.scrollY > 200) {
+            button.classList.add("show");
+        } else {
+            button.classList.remove("show");
+        }
+    }
+    else {
+        if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 50) {
+            loadNextPosts();
+        }
     }
 });
 
 function loadPost(postId) {
+    onHome = false;
     history.pushState(null, "", `?post=${postId}`);
     const content = document.getElementById("content");
     content.innerHTML = "<p>Loading post...</p>";
@@ -116,7 +130,8 @@ function loadPost(postId) {
                             ${html}
                         </article>
                         <br>
-                        <a href="/" onclick="event.preventDefault(); loadHome();">Back to Home</a>
+                        <a href="/">Back to Home</a>
+                        <button id="scroll-to-top" onclick="scrollToTop()">🡅</button>
                         <div id="disqus_thread"></div>
                     `;
 
@@ -190,12 +205,6 @@ function showSearchBar() {
     document.getElementById("search").style.display = "block";
 }
 
-// Ensure search bar reappears when going back to home
-document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("logo-container").addEventListener("click", function () {
-        showSearchBar();
-    });
-});
 
 function toggleSidebar() {
     const sidebar = document.getElementById("sidebar");
@@ -210,4 +219,8 @@ function toggleSidebar() {
         toggleButton.classList.add("open");
         toggleButton.innerHTML = "❯"; // Arrow pointing left
     }
+}
+
+function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: "smooth" });
 }

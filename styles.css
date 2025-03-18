@@ -418,3 +418,25 @@ article .tags {
     width: 20px; /* Adjust icon size */
     height: auto;
 }
+
+#scroll-to-top {
+    position: fixed;
+    height: 50px;
+    width: 50px;
+    bottom: 20px;
+    right: 20px;
+    background: #222;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 50%;
+    display: none; /* Initially hidden */
+    transition: opacity 0.3s ease-in-out;
+}
+
+#scroll-to-top.show {
+    display: block;
+    opacity: 1;
+}
