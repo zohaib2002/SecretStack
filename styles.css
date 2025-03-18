@@ -323,3 +323,98 @@ article .tags {
 #disqus_thread {
     margin-top: 20px; /* Adjust spacing as needed */
 }
+
+
+/* Sidebar Styles */
+#sidebar {
+    position: fixed;
+    top: 50%;
+    right: -150px; /* Hidden by default */
+    width: 140px;
+    background: white;
+    color: black;
+    padding: 10px;
+    border-radius: 10px 0 0 10px;
+    transition: right 0.3s ease-in-out;
+    transform: translateY(-50%);
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.dark-mode #sidebar {
+    background: #222;
+    color: white;
+}
+
+.sidebar-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-content a {
+    font-size: 16px;
+    font-family: 'Consolas';
+    color: black;
+    text-decoration: none;
+    padding: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    transition: background 0.2s;
+}
+
+.dark-mode .sidebar-content a {
+    color: white;
+}
+
+.sidebar-content a:last-child {
+    border-bottom: none;
+}
+
+.sidebar-content a:hover {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .sidebar-content a:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Sidebar Toggle Button */
+#sidebar-toggle {
+    position: fixed;
+    top: 50%;
+    right: 10px;
+    background: white;
+    color: #222;
+    border: none;
+    padding: 5px 10px;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 5px 0 0 5px;
+    transition: right 0.3s ease-in-out;
+    transform: translateY(-50%);
+    box-shadow: -2px -2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode #sidebar-toggle {
+    background: #222;
+    color: white;
+}
+
+#sidebar.open {
+    right: 0;
+}
+
+#sidebar-toggle.open {
+    right: 160px;
+}
+
+.social-link {
+    display: flex;
+    align-items: center; /* Align icon and text vertically */
+    gap: 8px; /* Add space between icon and text */
+}
+
+.social-link img {
+    width: 20px; /* Adjust icon size */
+    height: auto;
+}

@@ -197,3 +197,17 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+function toggleSidebar() {
+    const sidebar = document.getElementById("sidebar");
+    const toggleButton = document.getElementById("sidebar-toggle");
+
+    if (sidebar.classList.contains("open")) {
+        sidebar.classList.remove("open");
+        toggleButton.classList.remove("open");
+        toggleButton.innerHTML = "❮"; // Arrow pointing right
+    } else {
+        sidebar.classList.add("open");
+        toggleButton.classList.add("open");
+        toggleButton.innerHTML = "❯"; // Arrow pointing left
+    }
+}
